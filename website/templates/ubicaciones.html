@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Ubicaciones
+{% endblock %}
+
+{% block content %}
+<h1>Ubicaciones</h1>
+<div id="map" style="height: 600px; width: 100%"></div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+    var map = L.map('map').setView([6.242282087740674, -75.5894805055804], 14);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    {% for location in locations %}
+    L.marker([{{ location.latitud }}, {{ location.longitud }}])
+        .addTo(map)
+        .bindPopup("{{ location.name }}")
+    {% endfor %}
+</script>
+{% endblock %}

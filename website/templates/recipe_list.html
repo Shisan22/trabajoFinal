@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Recetas{% endblock %}
+
+{% block content %}
+<h1>Recetas</h1>
+<ul>
+    {% for recipe in recipes %}
+    <li>{{ recipe.product.name }} - <img src="{{ recipe.image.url }}" alt="{{ recipe.product.name }}"></li>
+    {% endfor %}
+</ul>
+{% endblock %}
